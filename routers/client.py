@@ -25,7 +25,9 @@ def read_client(*, db: Session = Depends(get_db), id: int):
 def update_client(*, db:Session = Depends(get_db), id:int):
     return cc.update_client(db, id)
 
-@router.delete
+@router.delete('/{id}')
+def delete_client(*, db:Session = Depends(get_db), id:int):
+    return cc.delete_client(db, id)
 
 @router.post('/deactivate')
 def deactivate_client(*, db:Session = Depends(get_db), id:int):
