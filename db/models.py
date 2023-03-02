@@ -1,5 +1,5 @@
 from .database import Base
-from sqlalchemy import Column, Integer, String, Float, ForeignKey
+from sqlalchemy import Column, Integer, String, Float, ForeignKey, Boolean
 from sqlalchemy.orm import relationship
 
 
@@ -15,9 +15,7 @@ class Client(Base):
     website = Column(String)
     description = Column(String)
     admin_id = Column(Integer, ForeignKey("admins.id"))
-    # children = relationship('Sub')
-    # children = relationship('Sub', back_populates='parent')
-    # admin = relationship('Admin')
+    active = Column(Boolean)
 
 
 class Sub(Base):

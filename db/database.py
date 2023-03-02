@@ -3,7 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import os
 
-DATABASE_URL = os.environ["TEST_DATABASE_URL"]
+DATABASE_URL = os.environ["PROD_DATABASE_URL"]
 
 engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 

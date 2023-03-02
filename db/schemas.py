@@ -13,20 +13,25 @@ class Admin(AdminBase):
     class Config:
         orm_mode = True
 
-
-class ClientCreate(BaseModel):
+class ClientBase(BaseModel):
     tier: int = 1
     name: str
+
+class ClientDetails(ClientBase):
     cac_id: str = None
     tin_id: str = None
     address: str = None
     website: str = None
     description: str = None
-    admin_id: AdminBase = 1
+    admin_id: int = 1
+
+    class Config:
+        orm_mode = True
 
 
-class Client(ClientCreate):
+class ClientID(ClientBase):
     id: int = None
+    active: bool = True
 
     class Config:
         orm_mode = True
