@@ -50,7 +50,9 @@ def upload_voice_transactions(db: Session, df: pd.DataFrame):
             .first()
         )
         if not client:
-            client = models.Client(**schemas.ClientBase(name=record.client_name).dict())
+            client = models.Client(
+                **schemas.ClientBase(name=record.client_name).dict(), active=True
+            )
             db.add(client)
             db.commit()
             db.refresh(client)  # refresh so we can get the client's id
@@ -127,7 +129,9 @@ def upload_data_transactions(db: Session, df: pd.DataFrame):
             .first()
         )
         if not client:
-            client = models.Client(**schemas.ClientBase(name=record.client_name).dict())
+            client = models.Client(
+                **schemas.ClientBase(name=record.client_name).dict(), active=True
+            )
             db.add(client)
             db.commit()
             db.refresh(client)  # refresh so we can get the client's id

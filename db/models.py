@@ -1,6 +1,6 @@
 from .database import Base
 from sqlalchemy import Column, Integer, String, Float, ForeignKey, Boolean
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, backref
 
 
 class Client(Base):
@@ -15,7 +15,24 @@ class Client(Base):
     website = Column(String)
     description = Column(String)
     admin_id = Column(Integer, ForeignKey("admins.id"))
+    focal_point_id = Column(Integer, ForeignKey("FocalPoints.id"))
     active = Column(Boolean)
+
+    # admin = relationship('Admin', foreign_keys=[admin_id])
+    focal_point = relationship(
+        "FocalPoint", backref=backref("client"), foreign_keys=[focal_point_id]
+    )
+
+
+class FocalPoint(Base):
+    __tablename__ = "FocalPoints"
+
+    id = Column(Integer, index=True, primary_key=True)
+
+    name = Column(String)
+    email = Column(String)
+    phone = Column(String)
+    client_id = Column(Integer, ForeignKey("clients.id"), unique=True)
 
 
 class Sub(Base):
