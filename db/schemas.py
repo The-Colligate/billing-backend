@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr, AnyUrl
+from pydantic import BaseModel, EmailStr
 
 
 class AdminBase(BaseModel):
@@ -14,7 +14,7 @@ class Admin(AdminBase):
         orm_mode = True
 
 
-class FocalPointBase(BaseModel):
+class FocalPoint(BaseModel):
     name: str
     email: EmailStr
     phone: str
@@ -23,9 +23,9 @@ class FocalPointBase(BaseModel):
         orm_mode = True
 
 
-class FocalPoint(FocalPointBase):
-    id: int = None
-    client_id: int
+# class FocalPoint(FocalPointBase):
+#     id: int = None
+#     client_id: int
 
 
 class ClientBase(BaseModel):
@@ -39,7 +39,7 @@ class ClientDetails(ClientBase):
     cac_id: str = None
     tin_id: str = None
     address: str = None
-    website: AnyUrl = None
+    website: str = None
     description: str = None
 
     class Config:
@@ -50,7 +50,7 @@ class Client(ClientDetails):
     """the schema for loading the user on get"""
 
     active: bool
-    focal_point: FocalPointBase = None
+    focal_point: FocalPoint = None
 
 
 class ClientID(ClientBase):

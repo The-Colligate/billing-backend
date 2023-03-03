@@ -3,8 +3,8 @@ from controllers import clientC as cc
 from sqlalchemy.orm import Session
 from db.database import get_db
 from db import schemas
-from pydantic import AnyUrl
 from utils import Tier
+from pydantic import EmailStr
 
 router = APIRouter(prefix="/clients", tags=["clients"])
 
@@ -26,14 +26,14 @@ def read_client(*, db: Session = Depends(get_db), id: int):
     return cc.read_client(db, id)
 
 
-@router.put("/update-tier/{id}")
+@router.put("/update_tier/{id}", status_code=status.HTTP_202_ACCEPTED)
 def update_client_tier(
     *, db: Session = Depends(get_db), client_id: int, new_tier: Tier
 ):
-    return cc.change
+    return cc.update_client_tier(db, client_id, new_tier)
 
 
-@router.put("/update/{id}")
+@router.put("/update/{id}", status_code=status.HTTP_202_ACCEPTED)
 def update_client(
     *,
     db: Session = Depends(get_db),
@@ -42,9 +42,10 @@ def update_client(
     cac_id: str = Form(default=None),
     tin_id: str = Form(default=None),
     address: str = Form(default=None),
-    website: AnyUrl = Form(default=None),
+    website: str = Form(default=None),
     description: str = Form(default=None),
 ):
+    """Update client details"""
     return cc.update_client(db, id, name, cac_id, tin_id, address, website, description)
 
 
@@ -63,11 +64,11 @@ def reactivate_client(*, db: Session = Depends(get_db), id: int):
     return cc.reactivate_client(db, id)
 
 
-@router.post("/{client_id}/add-focal-point", status_code=status.HTTP_201_CREATED)
-def create_focal_point(
+@router.post("/{client_id}/set_focal_point", status_code=status.HTTP_201_CREATED)
+def set_focal_point(
     *,
     db: Session = Depends(get_db),
-    focal_point: schemas.FocalPointBase,
+    focal_point: schemas.FocalPoint,
     client_id: int,
 ):
     """create a focal point, then attach them to the client they represent"""
@@ -79,11 +80,18 @@ def create_focal_point(
 #     return cc.read_focal_point(db, client_id)
 
 
-@router.put("/{client_id}/focal-point")
-def update_focal_point(*, db: Session = Depends(get_db), client_id: int):
-    return cc.update_focal_point(db, client_id)
+@router.put("/{client_id}/focal_point")
+def update_focal_point(
+    *,
+    db: Session = Depends(get_db),
+    name: str = Form(default=None),
+    email: EmailStr = Form(default=None),
+    phone: str = Form(default=None),
+    client_id: int,
+):
+    return cc.update_focal_point(db, name, email, phone, client_id)
 
 
-@router.delete("/{client_id}/focal-point")
+@router.delete("/{client_id}/focal_point")
 def remove_focal_point(*, db: Session = Depends(get_db), client_id: int):
     return cc.remove_focal_point(db, client_id)
