@@ -1,18 +1,19 @@
 import pandas as pd
 from sqlalchemy.orm import Session
 from db import models, schemas
+from datetime import datetime
 
 
-def initiate_upload(db: Session, service: str, month: str, year: int, xlfile):
+def initiate_upload(db: Session, plan: str, month: str, year: int, xlfile):
     df = pd.read_excel(xlfile.file)
     df["month"] = month
     df["year"] = year
-    if service.value == "voice":
+    if plan.value == "voice":
         upload_voice_transactions(db, df)
-    if service.value == "data":
+    if plan.value == "data":
         upload_data_transactions(db, df)
 
-    return f"{df.shape[0]} rows in '{xlfile.filename}' uploaded to '{service.value.title()}' table✅"
+    return f"{df.shape[0]} rows in '{xlfile.filename}' uploaded to '{plan.value.title()}' table✅"
 
 
 def upload_voice_transactions(db: Session, df: pd.DataFrame):
@@ -51,7 +52,7 @@ def upload_voice_transactions(db: Session, df: pd.DataFrame):
         )
         if not client:
             client = models.Client(
-                **schemas.ClientBase(name=record.client_name).dict(), active=True
+                **schemas.ClientBase(name=record.client_name).dict(), active=True, created=datetime.now()
             )
             db.add(client)
             db.commit()
@@ -130,7 +131,7 @@ def upload_data_transactions(db: Session, df: pd.DataFrame):
         )
         if not client:
             client = models.Client(
-                **schemas.ClientBase(name=record.client_name).dict(), active=True
+                **schemas.ClientBase(name=record.client_name).dict(), active=True, created=datetime.now()
             )
             db.add(client)
             db.commit()

@@ -15,12 +15,12 @@ router = APIRouter(prefix="/file")
 def upload(
     *,
     db: Session = Depends(get_db),
-    service: Plan,
+    plan: Plan,
     month: Month,
     year: int = Query(default=datetime.now().year),
     excelfile: UploadFile = File()
 ):
-    return fc.initiate_upload(db, service, month, year, excelfile)
+    return fc.initiate_upload(db, plan, month, year, excelfile)
 
 
 @router.get("/recent")

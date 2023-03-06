@@ -1,5 +1,5 @@
 from .database import Base
-from sqlalchemy import Column, Integer, String, Float, ForeignKey, Boolean
+from sqlalchemy import Column, Integer, String, Float, ForeignKey, Boolean, DateTime
 from sqlalchemy.orm import relationship, backref
 
 
@@ -16,6 +16,7 @@ class Client(Base):
     description = Column(String)
     admin_id = Column(Integer, ForeignKey("admins.id"))
     focal_point_id = Column(Integer, ForeignKey("FocalPoints.id"))
+    created = Column(DateTime)
     active = Column(Boolean)
 
     # admin = relationship('Admin', foreign_keys=[admin_id])

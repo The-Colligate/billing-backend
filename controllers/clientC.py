@@ -3,10 +3,11 @@ from sqlalchemy.orm import Session
 from fastapi import HTTPException, status
 from sqlalchemy.exc import IntegrityError
 from pydantic import EmailStr
+from datetime import datetime
 
 
 def create_client(db: Session, client: schemas.ClientDetails):
-    new_client = models.Client(**client.dict(), active=True)
+    new_client = models.Client(**client.dict(), active=True, created=datetime.now())
     db.add(new_client)
     db.commit()
     db.refresh(new_client)

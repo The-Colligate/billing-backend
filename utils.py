@@ -8,6 +8,11 @@ class Plan(str, Enum):
     voice = "voice"
     data = "data"
 
+class PlanExt(str, Enum):
+    all = "all"
+    voice = "voice"
+    data = "data"
+
 
 class Month(str, Enum):
     January = "January"

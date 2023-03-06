@@ -1,4 +1,5 @@
 from pydantic import BaseModel, EmailStr
+from datetime import datetime
 
 
 class AdminBase(BaseModel):
@@ -49,6 +50,7 @@ class ClientDetails(ClientBase):
 class Client(ClientDetails):
     """the schema for loading the user on get"""
 
+    created: datetime
     active: bool
     focal_point: FocalPoint = None
 
