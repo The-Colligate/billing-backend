@@ -153,7 +153,7 @@ def create_focal_point(db: Session, focal_point: schemas.FocalPoint, client_id: 
         )
 
 
-def update_focal_point(db, name:str, email:EmailStr, phone:str, client_id):
+def update_focal_point(db, name: str, email: EmailStr, phone: str, client_id):
     fp = db.query(models.FocalPoint).filter(models.FocalPoint.client_id == client_id)
 
     if not fp.first():
@@ -162,15 +162,15 @@ def update_focal_point(db, name:str, email:EmailStr, phone:str, client_id):
         )
 
     update_values = {
-        'name': name or fp.first().name,
-        'email': email or fp.first().email,
-        'phone': phone or fp.first().phone
+        "name": name or fp.first().name,
+        "email": email or fp.first().email,
+        "phone": phone or fp.first().phone,
     }
 
     fp.update(update_values)
     db.commit()
 
-    return 'updated'
+    return "updated"
 
 
 def remove_focal_point(db, client_id):

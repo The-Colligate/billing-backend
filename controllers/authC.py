@@ -7,6 +7,7 @@ from jose import jwt, JWTError
 from dotenv import load_dotenv
 import os
 from datetime import timedelta, datetime
+from utils import credentials_exception
 
 load_dotenv()
 
@@ -52,4 +53,8 @@ def create_access_token(data: dict):
 
 
 def signup(db: Session, username: str, password: str):
+    ...
+
+
+def get_current_author():
     ...
