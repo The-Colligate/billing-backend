@@ -1,12 +1,21 @@
 from pathlib import Path
 from enum import Enum
+from fastapi.exceptions import HTTPException
+from fastapi import status
 
 home = Path(__file__).resolve().parent  # store path to home
+
+credentials_exception = HTTPException(
+    status_code=status.HTTP_401_UNAUTHORIZED,
+    detail="incorrect credentials",
+    headers={"WWW-Authenticate": "Bearer"},
+)
 
 
 class Plan(str, Enum):
     voice = "voice"
     data = "data"
+
 
 class PlanExt(str, Enum):
     all = "all"

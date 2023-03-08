@@ -52,7 +52,9 @@ def upload_voice_transactions(db: Session, df: pd.DataFrame):
         )
         if not client:
             client = models.Client(
-                **schemas.ClientBase(name=record.client_name).dict(), active=True, created=datetime.now()
+                **schemas.ClientBase(name=record.client_name).dict(),
+                active=True,
+                created=datetime.now(),
             )
             db.add(client)
             db.commit()
@@ -131,7 +133,9 @@ def upload_data_transactions(db: Session, df: pd.DataFrame):
         )
         if not client:
             client = models.Client(
-                **schemas.ClientBase(name=record.client_name).dict(), active=True, created=datetime.now()
+                **schemas.ClientBase(name=record.client_name).dict(),
+                active=True,
+                created=datetime.now(),
             )
             db.add(client)
             db.commit()
