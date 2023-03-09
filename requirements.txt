@@ -19,7 +19,7 @@ numpy==1.24.2 ; python_version >= '3.10'
 openpyxl==3.1.1
 packaging==23.0
 pandas==1.5.3
-passlib[bcrypt]==1.7.4s
+passlib[bcrypt]==1.7.4
 pathspec==0.11.0 ; python_version >= '3.7'
 platformdirs==3.1.0 ; python_version >= '3.7'
 pyasn1==0.4.8
