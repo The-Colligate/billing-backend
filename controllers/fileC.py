@@ -5,7 +5,7 @@ from datetime import datetime
 
 
 def initiate_upload(db: Session, plan: str, month: str, year: int, xlfile):
-    df = pd.read_excel(xlfile.file)
+    df = pd.read_excel(xlfile.file, engine="openpyxl")
     df["month"] = month
     df["year"] = year
     if plan.value == "voice":
