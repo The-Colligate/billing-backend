@@ -31,3 +31,4 @@ TODO
 - access management
 - token expiration
 - pending clients (in the design)
+- change to Decimal
