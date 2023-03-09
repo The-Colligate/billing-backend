@@ -21,7 +21,7 @@ def admin_login(
     *, db: Session = Depends(get_db), form_data=Depends(OAuth2PasswordRequestForm)
 ):
     db_admin = ac.authenticate_admin(db, form_data.username, form_data.password)
-    access_token = ac.create_access_token(data={"sub": "admin:" + db_admin.email})
+    access_token = ac.create_access_token(data={"sub": 'admin:'+db_admin.email})
 
     return {"access_token": access_token, "token_type": "bearer"}
 
@@ -30,13 +30,14 @@ def admin_login(
 def current_admin(*, db: Session = Depends(get_db), token: str = Depends(admin_auth)):
     try:
         payload = jwt.decode(token, key=SECRET_KEY, algorithms=[ALGORITHM])
-        email: str = payload.get("sub").split(":")[1]
+        email:str = payload.get('sub').split(':')[1]
         if email is None:
             raise credentials_exception
     except JWTError:
         raise credentials_exception
     admin = dc.read_admin_by_email(db, email)
     return admin
+    
 
 
 @router.post("/client/login", deprecated=True)

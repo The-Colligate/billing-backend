@@ -28,3 +28,6 @@ TODO
 - define parent-child relationships 
 - calculate loyalty
 - resolve whether invoices come in with a timestamp (to sort for recent_invoices route)
+- access management
+- token expiration
+- pending clients (in the design)
