@@ -4,3 +4,4 @@ template.txt
 *.db
 *.png
 *.jpeg
+.env
