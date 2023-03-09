@@ -42,7 +42,7 @@ def authenticate_client(db: Session):
     ...
 
 
-def create_access_token(data: dict):
+def create_access_token(data: dict, admin: bool = True):
     to_encode = data.copy()
     expiry_time = datetime.now() + timedelta(hours=EXPIRY_HOURS)
 
