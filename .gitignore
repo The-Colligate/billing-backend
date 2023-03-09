@@ -1,6 +1,7 @@
-.env
+notes.md
 __pycache__/
 template.txt
 *.db
 *.png
 *.jpeg
+.env
