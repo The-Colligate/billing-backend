@@ -13,3 +13,9 @@ def create_admin(db: Session, name: str, email: EmailStr, password: str):
     db.commit()
     db.refresh(new_admin)
     return new_admin
+
+
+def read_admin_by_email(db: Session, email: EmailStr):
+    admin = db.query(models.Admin).filter(models.Admin.email == email).first()
+
+    return admin
