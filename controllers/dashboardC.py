@@ -32,7 +32,7 @@ def calc_revenue(db: Session, plan: str):
         return db.query(func.sum(models.Voice.last_payment)).scalar()
     elif plan.value == "data":
         return db.query(func.sum(models.Data.last_payment)).scalar()
-
+ 
 
 def calc_loyalty(db: Session, plan: str):
     if plan.value == "all":
@@ -48,3 +48,15 @@ def recent_invoices(db: Session, plan: str, len: int):
         return db.query(models.Voice).limit(len).all()
     elif plan.value == "data":
         return db.query(models.Data).limit(len).all()
+
+
+def get_debt(db: Session, plan: str):
+    if plan.value == "all":
+        return (
+            db.query(func.sum(models.Data.debit)).scalar()
+            + db.query(func.sum(models.Voice.outstanding_debt)).scalar()
+        )
+    elif plan.value == "voice":
+        return db.query(func.sum(models.Data.debit)).scalar()
+    elif plan.value == "data":
+        return db.query(func.sum(models.Voice.outstanding_debt)).scalar()

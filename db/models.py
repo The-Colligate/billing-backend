@@ -1,5 +1,5 @@
 from .database import Base
-from sqlalchemy import Column, Integer, String, Float, ForeignKey, Boolean, DateTime
+from sqlalchemy import Column, Integer, String, ForeignKey, Boolean, DateTime, DECIMAL
 from sqlalchemy.orm import relationship, backref
 
 
@@ -69,10 +69,10 @@ class Voice(Base):
     client_name = Column(String)
     client_id = Column(ForeignKey("clients.id"))
     msisdn = Column(Integer)
-    balance_forward = Column(Float)
-    current_invoice = Column(Float)
-    last_payment = Column(Float)
-    outstanding_debt = Column(Float)
+    balance_forward = Column(DECIMAL)
+    current_invoice = Column(DECIMAL)
+    last_payment = Column(DECIMAL)
+    outstanding_debt = Column(DECIMAL)
     month = Column(String)
     year = Column(Integer)
 
@@ -86,14 +86,11 @@ class Data(Base):
     client_name = Column(String)
     client_id = Column(ForeignKey("clients.id"))
     business_unit = Column(String)
-    balance = Column(Float)
-    last_invoice = Column(Float)
-    last_payment = Column(Float)
-    debit = Column(Float)
-    credit = Column(Float)
+    balance = Column(DECIMAL)
+    last_invoice = Column(DECIMAL)
+    last_payment = Column(DECIMAL)
+    debit = Column(DECIMAL)
+    credit = Column(DECIMAL)
     currency = Column(String)
     month = Column(String)
     year = Column(Integer)
-
-
-#     # customer = relationship('')
