@@ -94,6 +94,3 @@ class Data(Base):
     currency = Column(String)
     month = Column(String)
     year = Column(Integer)
-
-
-#     # customer = relationship('')
