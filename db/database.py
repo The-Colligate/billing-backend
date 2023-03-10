@@ -8,13 +8,14 @@ db_user = os.environ["DB_USER"]  # e.g. 'my-db-user'
 db_pass = os.environ["DB_PASS"]  # e.g. 'my-db-password'
 db_name = os.environ["DB_NAME"]  # e.g. 'my-database'
 db_port = os.environ["DB_PORT"]  # e.g. 3306
+connection_name = os.environ['CONNECTION_NAME']
 
 
 # Python Connector database connection function
 def getconn():
     with Connector() as connector:
         conn = connector.connect(
-            "billing-380023:us-central1:colligate-prod", # Cloud SQL Instance Connection Name
+            connection_name, # Cloud SQL Instance Connection Name
             "pymysql",
             user=db_user,
             password=db_pass,
