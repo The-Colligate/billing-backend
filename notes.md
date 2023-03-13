@@ -16,6 +16,9 @@ platinum - can't be disconnected, prioritized support
 
 silver customers who still owe will be disconnected
 
+COMMANDS
+curl ifconfig.me - to get public IP address
+
 
 TODO
 - validate voice/data file
