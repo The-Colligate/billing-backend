@@ -7,13 +7,13 @@ class Client(Base):
     __tablename__ = "clients"
 
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String)
+    name = Column(String(255))
     tier = Column(Integer)
-    cac_id = Column(String)
-    tin_id = Column(String)
-    address = Column(String)
-    website = Column(String)
-    description = Column(String)
+    cac_id = Column(String(20))
+    tin_id = Column(String(20))
+    address = Column(String(500))
+    website = Column(String(500))
+    description = Column(String(255))
     admin_id = Column(Integer, ForeignKey("admins.id"))
     focal_point_id = Column(Integer, ForeignKey("FocalPoints.id"))
     created = Column(DateTime)
@@ -30,9 +30,9 @@ class FocalPoint(Base):
 
     id = Column(Integer, index=True, primary_key=True)
 
-    name = Column(String)
-    email = Column(String)
-    phone = Column(String)
+    name = Column(String(255))
+    email = Column(String(255))
+    phone = Column(String(255))
     client_id = Column(Integer, ForeignKey("clients.id"), unique=True)
 
 
@@ -54,10 +54,10 @@ class Admin(Base):
     __tablename__ = "admins"
 
     id = Column(Integer, primary_key=True)
-    name = Column(String)
-    email = Column(String, unique=True)
+    name = Column(String(255))
+    email = Column(String(255), unique=True)
     level = Column(Integer)
-    hashed_password = Column(String)
+    hashed_password = Column(String(255))
 
 
 class Voice(Base):
@@ -66,14 +66,14 @@ class Voice(Base):
 
     id = Column(Integer, primary_key=True, index=True)
 
-    client_name = Column(String)
+    client_name = Column(String(255))
     client_id = Column(ForeignKey("clients.id"))
     msisdn = Column(Integer)
     balance_forward = Column(DECIMAL)
     current_invoice = Column(DECIMAL)
     last_payment = Column(DECIMAL)
     outstanding_debt = Column(DECIMAL)
-    month = Column(String)
+    month = Column(String(255))
     year = Column(Integer)
 
 
@@ -83,14 +83,14 @@ class Data(Base):
 
     id = Column(Integer, primary_key=True, index=True)
 
-    client_name = Column(String)
+    client_name = Column(String(255))
     client_id = Column(ForeignKey("clients.id"))
-    business_unit = Column(String)
+    business_unit = Column(String(255))
     balance = Column(DECIMAL)
     last_invoice = Column(DECIMAL)
     last_payment = Column(DECIMAL)
     debit = Column(DECIMAL)
     credit = Column(DECIMAL)
-    currency = Column(String)
-    month = Column(String)
+    currency = Column(String(5))
+    month = Column(String(10))
     year = Column(Integer)
