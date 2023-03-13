@@ -27,11 +27,11 @@ def getconn():
         )
     return conn
 
-# DATABASE_URL = "mysql+pymysql://"
+DATABASE_URL = "mysql+pymysql://"
 
-# engine = create_engine(DATABASE_URL, creator=getconn)
+engine = create_engine(DATABASE_URL, creator=getconn)
 
-engine = create_engine("sqlite:///./billing-prod.db", connect_args={"check_same_thread": False})
+# engine = create_engine("sqlite:///./billing-prod.db", connect_args={"check_same_thread": False})
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 

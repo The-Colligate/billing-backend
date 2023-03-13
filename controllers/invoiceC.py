@@ -7,7 +7,7 @@ import json
 def create_invoice(
     db: Session,
     invoice_info: schemas.InvoiceCreate,
-    services: list[schemas.Service],
+    services: list[schemas.ServiceInvoice],
     client_id: int,
 ):
     # convert service objects to dict, or they will be stored as object instantiation strings
