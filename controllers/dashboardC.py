@@ -32,7 +32,7 @@ def calc_revenue(db: Session, plan: str):
         return db.query(func.sum(models.Voice.last_payment)).scalar()
     elif plan.value == "data":
         return db.query(func.sum(models.Data.last_payment)).scalar()
- 
+
 
 def calc_loyalty(db: Session, plan: str):
     if plan.value == "all":

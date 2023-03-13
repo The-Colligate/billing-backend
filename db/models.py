@@ -91,6 +91,28 @@ class Data(Base):
     last_payment = Column(DECIMAL)
     debit = Column(DECIMAL)
     credit = Column(DECIMAL)
-    currency = Column(String(5))
-    month = Column(String(10))
+    currency = Column(String)
+    month = Column(String)
     year = Column(Integer)
+
+
+class Invoice(Base):
+    __tablename__ = "invoices"
+
+    invoice_id = Column(Integer, primary_key=True, index=True)
+    client_id = Column(ForeignKey("clients.id"))
+    statement_date = Column(DateTime)
+    billing_start = Column(DateTime)
+    billing_end = Column(DateTime)
+    due_date = Column(DateTime)
+    amount_due = Column(DECIMAL)
+    services = Column(String(2000))
+
+    client = relationship("Client", foreign_keys=[client_id])
+
+class Service(Base):
+    __tablename__ = 'services'
+
+    id = Column(Integer, primary_key=True, index=True)
+    service = Column(String(100))
+    rate = Column(DECIMAL)
