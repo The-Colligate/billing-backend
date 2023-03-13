@@ -1,5 +1,6 @@
-from pydantic import BaseModel, EmailStr
-from datetime import datetime
+from pydantic import BaseModel, EmailStr, Field
+from datetime import datetime, date, timedelta
+from decimal import Decimal
 
 
 class AdminBase(BaseModel):
@@ -66,6 +67,15 @@ class ClientID(ClientBase):
         orm_mode = True
 
 
+class ClientInvoice(ClientBase):
+    """name, tier and address of client, for creating invoice"""
+
+    address: str = None
+
+    class Config:
+        orm_mode = True
+
+
 class VoiceCreate(BaseModel):
     client_name: str
     client_id: int
@@ -97,3 +107,27 @@ class DataCreate(BaseModel):
 
 class Data(DataCreate):
     id: int
+
+
+class Service(BaseModel):
+    service: str
+    quantity: float
+    
+
+    class Config:
+        orm_mode = True
+
+
+class InvoiceCreate(BaseModel):
+    statement_date: date = Field(default_factory=date.today)
+    billing_start: date
+    billing_end: date
+    due_date: date
+    amount_due: Decimal = 0.0
+
+
+class Invoice(BaseModel):
+    services: list[Service]
+    client_id: int
+    invoice_id: int
+    bill_to: ClientInvoice

@@ -1,0 +1,43 @@
+main {
+  max-width: 1024px;
+  margin: auto;
+}
+table,
+th,
+td {
+  border: 1px solid #000;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 5px;
+}
+
+.billTo {
+  width: 20%;
+  float: left;
+}
+.billFrom {
+  width: 20%;
+  float: left;
+}
+
+.table2 {
+  display: flex;
+  justify-content: space-between;
+
+  margin-top: 20px;
+}
+
+.table3 {
+  margin-top: 20px;
+}
+
+.table3 table {
+  width: 100%;
+}
+
+.period {
+  border: 1px solid #000;
+}

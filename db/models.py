@@ -94,3 +94,19 @@ class Data(Base):
     currency = Column(String)
     month = Column(String)
     year = Column(Integer)
+
+
+class Invoice(Base):
+    __tablename__ = "invoices"
+
+    invoice_id = Column(Integer, primary_key=True, index=True)
+    client_id = Column(ForeignKey("clients.id"))
+    statement_date = Column(DateTime)
+    billing_start = Column(DateTime)
+    billing_end = Column(DateTime)
+    due_date = Column(DateTime)
+    amount_due = Column(DECIMAL)
+    services = Column(String(2000))
+
+    client = relationship("Client", foreign_keys=[client_id])
+
