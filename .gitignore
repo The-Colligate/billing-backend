@@ -5,3 +5,5 @@ template.txt
 *.png
 *.jpeg
 .env
+Pipfile
+Pipfile.lock
