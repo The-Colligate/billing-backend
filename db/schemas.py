@@ -109,13 +109,18 @@ class Data(DataCreate):
     id: int
 
 
-class Service(BaseModel):
+class ServiceBase(BaseModel):
     service: str
+
+class ServiceInvoice(ServiceBase):
+    '''Used to add a service to the invoice'''
     quantity: float
-    
 
     class Config:
         orm_mode = True
+
+class ServiceEdit(ServiceBase):
+    rate: Decimal
 
 
 class InvoiceCreate(BaseModel):
@@ -127,7 +132,7 @@ class InvoiceCreate(BaseModel):
 
 
 class Invoice(BaseModel):
-    services: list[Service]
+    services: list[ServiceInvoice]
     client_id: int
     invoice_id: int
     bill_to: ClientInvoice

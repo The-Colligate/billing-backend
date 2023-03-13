@@ -13,7 +13,7 @@ def create_invoice(
     *,
     db: Session = Depends(get_db),
     invoice_info: schemas.InvoiceCreate,
-    services: list[schemas.Service],
+    services: list[schemas.ServiceInvoice],
     client_id: int
 ):
     """Send in details for creating an invoice. A PDF is generated and sent to the focal point"""

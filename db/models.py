@@ -110,3 +110,9 @@ class Invoice(Base):
 
     client = relationship("Client", foreign_keys=[client_id])
 
+class Service(Base):
+    __tablename__ = 'services'
+
+    id = Column(Integer, primary_key=True, index=True)
+    service = Column(String(100))
+    rate = Column(DECIMAL)
