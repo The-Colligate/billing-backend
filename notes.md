@@ -34,4 +34,5 @@ TODO
 - access management
 - token expiration
 - pending clients (in the design)
-- change to Decimal
+- change to Decimal ✅
+- add tags to recent invoices: paid, overdue, pending
